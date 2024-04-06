@@ -7,7 +7,7 @@ import 'package:gap/gap.dart';
 import 'package:insights_news/core/services/local_storage.dart';
 import 'package:insights_news/core/utils/colors.dart';
 import 'package:insights_news/core/utils/text_style.dart';
-import 'package:insights_news/features/home/widget/custom_list_builder.dart';
+import 'package:insights_news/features/home/presentation/widget/custom_list_builder.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeView extends StatefulWidget {
@@ -131,10 +131,18 @@ class _HomeViewState extends State<HomeView> {
                 const Expanded(
                   child: TabBarView(
                     children: [
-                      CustomListBuilder(),
-                      CustomListBuilder(),
-                      CustomListBuilder(),
-                      CustomListBuilder(),
+                      CustomListBuilder(
+                        category: 'science',
+                      ),
+                      CustomListBuilder(
+                        category: 'entertainment',
+                      ),
+                      CustomListBuilder(
+                        category: 'sports',
+                      ),
+                      CustomListBuilder(
+                        category: 'business',
+                      ),
                     ],
                   ),
                 ),

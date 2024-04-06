@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:insights_news/core/utils/colors.dart';
 import 'package:insights_news/core/utils/text_style.dart';
-import 'package:insights_news/features/home/widget/custom_list_builder.dart';
+import 'package:insights_news/features/home/presentation/manager/news_cubit.dart';
+import 'package:insights_news/features/search/widgets/customsearch_list.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
@@ -13,6 +15,7 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
+  var searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,9 +29,7 @@ class _SearchViewState extends State<SearchView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextFormField(
-              onChanged: (value) {
-                setState(() {});
-              },
+              controller: searchController,
               style: getBodySytle(context),
               cursorColor: Colors.white,
               decoration: InputDecoration(
@@ -41,6 +42,14 @@ class _SearchViewState extends State<SearchView> {
                   fit: BoxFit.scaleDown,
                   colorFilter:
                       const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                ),
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    context
+                        .read<NewsCubit>()
+                        .getNewBySearch(searchController.text);
+                  },
+                  icon: const Icon(Icons.search),
                 ),
               ),
             ),
@@ -56,7 +65,7 @@ class _SearchViewState extends State<SearchView> {
             const Expanded(
                 child: Padding(
               padding: EdgeInsets.only(bottom: 50),
-              child: CustomListBuilder(),
+              child: CustomSearchListBuilder(),
             )),
           ],
         ),

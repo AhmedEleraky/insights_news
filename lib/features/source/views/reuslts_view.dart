@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:insights_news/core/utils/text_style.dart';
-import 'package:insights_news/features/home/widget/custom_list_builder.dart';
+import 'package:insights_news/features/home/presentation/widget/custom_list_builder.dart';
 
 class ResultView extends StatelessWidget {
   const ResultView({super.key});
@@ -22,7 +22,10 @@ class ResultView extends StatelessWidget {
               'Total Results : 10',
               style: getBodySytle(context),
             ),
-            const Expanded(child: CustomListBuilder()),
+            const Expanded(
+                child: CustomListBuilder(
+              category: 'general',
+            )),
           ],
         ),
       ),
